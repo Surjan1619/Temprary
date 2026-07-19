@@ -118,7 +118,6 @@ TurboRoll սպիրալային դարպասներ
 
 ___________________________________
 
-
 ProFire հակահրդեհային սեկցիոն դարպասներ
 
 [200~Նախատեսված են հրդեհի տեղայնացման համար։ ProFire դարպասները պաշտպանում են կրակի և ծխի տարածումից այն տարածքներում, որոնք գտնվում են հրդեհի աղբյուրին հարակից։
@@ -142,6 +141,85 @@ ______________________________
 
 «Գարմոշկա» տիպի ավտոմատ հրդեհապաշտպանիչ վարագույրները հրդեհի դեպքում նախատեսված են փակ տարածք ձևավորելու համար՝ թույլ չտալով կրակի և ծխի տարածումը ամբողջ շենքով մեկ, այդպիսով պաշտպանելով մարդկանց և նյութական արժեքները այրման արդյունքների և բարձր ջերմաստիճանի ազդեցությունից։ «Գարմոշկա» ծխապաշտպանիչ վարագույրները հրդեհապաշտպանիչներից տարբերվում են իջեցման բարձրությամբ։ Հրդեհապաշտպանիչ գարմոշկաները իջեցվում են մինչև հատակ, իսկ ծխապաշտպանիչները՝ նախագծով սահմանված ծխային շերտի բարձրության վրա։
 
+
+
+
+1. TurboFlex (Ռուլոնային / Ճկուն Պ դարպասներ)Նյութը: Օգտագործվում է բարձր ամրության ճկուն ՊՎՔ տենտ (հաստությունը՝ 0.7 մմ, խտությունը՝ 900 գ/մ²).  Ինքնավերականգնվող կոնստրուկցիա (Self-repairing): Եթե բեռնատարը կամ պատառաքաղավոր ամբարձիչը (погрузчик) հարվածի դարպասին և կտորը դուրս գա ուղղորդող ռելսերից, հաջորդ իսկ բացման ցիկլի ժամանակ այն ավտոմատ հետ է մտնում իր տեղը.  Կոռոզիակայունություն: Տուփը և կողային հենակները պատրաստված են ալյումինե համաձուլվածքից, ինչը թույլ է տալիս դրանք տեղադրել բարձր խոնավություն ունեցող տարածքներում (օրինակ՝ սննդի արդյունաբերություն).  Քամու դիմադրություն: Մինչև 9 մ² տարածքով դարպասները դիմանում են մինչև 120 կմ/ժ արագությամբ քամուն (3-րդ դաս).  2. TurboRoll (Սպիրալային / Սենդվիչ-պանելային դարպասներ)  Նյութը: Պատրաստված են պինդ, պողպատե սենդվիչ-պանելներից (հաստությունը՝ 42 մմ).  Ջերմամեկուսացում: Ի տարբերություն ՊՎՔ տենտի, սպիրալային դարպասները ոչ միայն արագ են բացվում, այլև ունեն բարձր ջերմամեկուսացում: Դրանք տեղադրվում են այնտեղ, որտեղ պետք է պահպանել շենքի տաքությունը կամ ցրտությունը (օրինակ՝ սառնարանային լոգիստիկ կենտրոններում).  3. Ընդհանուր ավտոմատիկայի բնութագրեր (երկուսի համար էլ)  Շարժիչ: Էլեկտրական հաղորդակ՝ վեկտորային կառավարմամբ և հաճախականության փոխակերպիչով (инвертор): Այն ապահովում է «Плавный старт / Плавный стоп» ֆունկցիան, ինչի շնորհիվ դարպասները չեն հարվածում և ծառայում են մինչև 1.5 միլիոն ցիկլ.  Անվտանգություն: Բլոկն ունի ներկառուցված էնկոդեր (դիրքի ճշգրիտ հսկողության համար), ինչպես նաև անվտանգության օպտիկական սենսորներ (фотоэлементы) և փափուկ եզրագիծ, որոնք բացառում են մարդկանց կամ տրանսպորտի վնասվելը:  
+
+
+
+
+
+========================================================================
+TECHNICAL DATA AND PRODUCT LINKS FOR DIGITALDOOR.AM CONTENT GENERATION
+========================================================================
+
+OBJECTIVE:
+Use the official links below to extract detailed technical specifications, 
+dimensions, mounting variations, and product descriptions for catalog entry.
+
+------------------------------------------------------------------------
+1. HIGH-SPEED INDUSTRIAL DOORS (ԱՐԱԳԸՆԹԱՑ ԴԱՐՊԱՍՆԵՐ)
+------------------------------------------------------------------------
+* Main Product Category Page (General info & media):
+  https://alutech-group.com/cis-ru/korporativnyy-klient/vorota/skorostnye-vorota/
+
+* TurboFlex (High-Speed Roll-Up PVC Doors):
+  https://alutech-group.com/cis-ru/arhitektor/vorota/skorostnye-vorota/skorostnye-rulonnye-vorota-turboflex/
+
+* Technical Documentation Search (Download "Description of design & installation data"):
+  https://alutech-group.com/cis-ru/chastnyy-domovladelec/podderzhka/dokumentaciya/
+  [Action: Select "Скоростные ворота" section for PDF manuals]
+
+------------------------------------------------------------------------
+2. PANORAMIC SECTIONAL DOORS (ՊԱՆՈՐԱՄԱՅԻՆ ԴԱՐՊԱՍՆԵՐ - AluPro, AluTrend, AluTherm)
+------------------------------------------------------------------------
+* Main Product Category Page:
+  https://alutech-group.com/cis-ru/korporativnyy-klient/vorota/promyshlennye-vorota/panoramnye-vorota/
+
+* Technical Documentation Search (For structural data and profile parameters):
+  https://alutech-group.com/cis-ru/chastnyy-domovladelec/podderzhka/dokumentaciya/
+  [Action: Select "Промышленные и панорамные ворота" section]
+
+------------------------------------------------------------------------
+3. FIRE-RATED SECTIONAL DOORS (ՀԱԿԱՀՐԴԵՀԱՅԻՆ ՍԵԿՑԻՈՆ ԴԱՐՊԱՍՆԵՐ - ProFire EI60)
+------------------------------------------------------------------------
+* Main Product Page (Alutech ProFire):
+  https://alutech-group.com/cis-ru/korporativnyy-klient/vorota/promyshlennye-vorota/protivopozharnye-vorota/
+
+* Technical Documentation Search:
+  https://alutech-group.com/cis-ru/chastnyy-domovladelec/podderzhka/dokumentaciya/
+  [Action: Select "Промышленные и панорамные ворота" -> ProFire manuals]
+
+------------------------------------------------------------------------
+4. FIRE & SMOKE ACCORDION CURTAINS (ՀԱԿԱՀՐԴԵՀԱՅԻՆ ԵՎ ԾԽԱՊԱՇՏՊԱՆԻՉ «ԳԱՐՄՈՇԿԱ» ՎԱՐԱԳՈՒՅՐՆԵՐ - MBA EI60/EI180)
+------------------------------------------------------------------------
+* Manufacturer's Technical Product Catalog (Comprehensive PDF with fabric & motor specs):
+  https://rulonvorota.ru/upload/documents/Katalog_MVA2020.pdf
+
+* Product Page Examples (For copy-editing features, application areas, and logic):
+  https://mva-rolltor.ru/protivopozharnye_shtory/protivopozharnye_shtory_garmoshka/
+  https://www.doormaster.ru/catalog/garmoshka/
+
+* Competitor/Alternative Wording Reference (FireTechnics Accordion):
+  https://www.fire-tec.ru/catalog/protivopozharnye-shtory/protivopozharnye-shtory-fireshields-garmoshka/
+
+------------------------------------------------------------------------
+5. STANDARD AUTOMATIC INDUSTRIAL DOORS (ԱՎՏՈՄԱՏ ԱՐԴՅՈՒՆԱԲԵՐԱԿԱՆ ԴԱՐՊԱՍՆԵՐ - ProPlus, ProTrend)
+------------------------------------------------------------------------
+* Industrial Sectional Doors Category Hub:
+  https://alutech-group.com/cis-ru/korporativnyy-klient/vorota/promyshlennye-vorota/sekcionnye-promyshlennye-vorota/
+
+* ProPlus Series Product Page (45mm panel, stainless steel components):
+  https://alutech-group.com/cis-ru/korporativnyy-klient/vorota/promyshlennye-vorota/sekcionnye-promyshlennye-vorota/proplus/
+
+* ProTrend Series Product Page (40mm panel, galvanized steel components):
+  https://alutech-group.com/cis-ru/korporativnyy-klient/vorota/promyshlennye-vorota/sekcionnye-promyshlennye-vorota/protrend/
+
+* Technical Documentation Search (Essential for the 12 mounting types diagram extraction):
+  https://alutech-group.com/cis-ru/chastnyy-domovladelec/podderzhka/dokumentaciya/
+  [Action: Select "Промышленные и панорамные ворота" -> Download installation guides]
+========================================================================
 
 
 

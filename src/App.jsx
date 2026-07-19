@@ -1016,11 +1016,11 @@ function HomePage({ onProductClick }) {
             <span className="text-lg font-light tracking-tight text-white/40 group-hover:text-white/60 transition-colors">DOOR</span>
           </a>
           <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-white/50">
-            <a href="#" className="relative py-1 hover:text-white transition-colors duration-300 after:absolute after:bottom-0 after:left-0 after:h-[1px] after:w-0 after:bg-white after:transition-all after:duration-300 hover:after:w-full">Գլխավոր</a>
+            <a href="#top" className="relative py-1 hover:text-white transition-colors duration-300 after:absolute after:bottom-0 after:left-0 after:h-[1px] after:w-0 after:bg-white after:transition-all after:duration-300 hover:after:w-full">Գլխավոր</a>
             <a href="#catalog" className="relative py-1 hover:text-white transition-colors duration-300 after:absolute after:bottom-0 after:left-0 after:h-[1px] after:w-0 after:bg-white after:transition-all after:duration-300 hover:after:w-full">Կատալոգ</a>
             <a href="#services" className="relative py-1 hover:text-white transition-colors duration-300 after:absolute after:bottom-0 after:left-0 after:h-[1px] after:w-0 after:bg-white after:transition-all after:duration-300 hover:after:w-full">Ծառայություններ</a>
             <a href="#faq" className="relative py-1 hover:text-white transition-colors duration-300 after:absolute after:bottom-0 after:left-0 after:h-[1px] after:w-0 after:bg-white after:transition-all after:duration-300 hover:after:w-full">ՀՏՀ</a>
-            <a href="#" className="relative py-1 hover:text-white transition-colors duration-300 after:absolute after:bottom-0 after:left-0 after:h-[1px] after:w-0 after:bg-white after:transition-all after:duration-300 hover:after:w-full">Կապ</a>
+            <a href="#faq" className="relative py-1 hover:text-white transition-colors duration-300 after:absolute after:bottom-0 after:left-0 after:h-[1px] after:w-0 after:bg-white after:transition-all after:duration-300 hover:after:w-full">Կապ</a>
           </nav>
           <a href="#" className="magnetic-btn hidden sm:inline-flex items-center rounded-full border border-white/20 px-6 py-2 text-sm font-semibold text-white hover:border-white/60 transition-all duration-300">Լրացնել հայտ</a>
           <button className="md:hidden flex flex-col gap-1.5 p-1" aria-label="Open menu">
@@ -1032,7 +1032,7 @@ function HomePage({ onProductClick }) {
       </header>
 
       {/* ─── HERO ─── */}
-      <section className="relative min-h-screen flex items-center overflow-hidden border-b border-white/[0.06]">
+      <section id="top" className="relative min-h-screen flex items-center overflow-hidden border-b border-white/[0.06]">
         <div className="absolute inset-0">
           <img src="https://images.unsplash.com/photo-1600607688968-a2ad6e6791ca?w=1920&q=85" alt="" className="h-full w-full object-cover animate-ken-burns" />
           <div className="absolute inset-0 bg-black/40" />
@@ -1175,99 +1175,88 @@ function HomePage({ onProductClick }) {
         </div>
       </section>
 
-      {/* ─── FAQ ─── */}
+      {/* ─── FAQ + CONTACTS ─── */}
       <section id="faq" ref={faqRef} className="relative overflow-hidden border-b border-white/[0.06] bg-[#0a0a0a]">
         <div className="absolute inset-0">
-          <img src="https://images.unsplash.com/photo-1600573472591-ee6b68d14c68?w=1920&q=85" alt="" className="h-full w-full object-cover opacity-20" />
+          <img src="https://images.unsplash.com/photo-1600573472591-ee6b68d14c68?w=1920&q=85" alt="" className="h-full w-full object-cover opacity-30" />
         </div>
-        <div className="relative mx-auto max-w-4xl px-6 py-20 lg:px-10 lg:py-32">
-          <div className="bg-[#0a0a0a]/70 backdrop-blur-sm rounded-2xl border border-white/[0.06] p-8 lg:p-12">
-            <div className="mb-16 scroll-reveal text-center">
-              <span className="font-mono text-xs tracking-[0.25em] text-white/30">04 // ՀՏՀ</span>
-              <h2 className="mt-4 text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl">Հաճախ տրվող հարցեր</h2>
-              <p className="mx-auto mt-4 max-w-lg text-base leading-relaxed text-white/35">Ամենատարածված հարցերը մեր հաճախորդների կողմից։</p>
+        <div className="relative mx-auto max-w-6xl px-6 py-20 lg:px-10 lg:py-24">
+          <div className="bg-[#0a0a0a]/60 backdrop-blur-sm rounded-2xl border border-white/[0.06] p-8 lg:p-12">
+            <div className="mb-12 scroll-reveal text-center">
+              <span className="font-mono text-sm tracking-[0.25em] text-white/80">04 // ՀՏՀ</span>
+              <h2 className="mt-4 text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl text-white">Հաճախ տրվող հարցեր</h2>
+              <p className="mx-auto mt-4 max-w-lg text-base leading-relaxed text-white/70">Ամենատարածված հարցերը մեր հաճախորդների կողմից։</p>
             </div>
             <div className="space-y-3">
             {faqs.map((faq, idx) => {
               const isOpen = openFaq === idx;
               return (
-                <div key={idx} className="scroll-reveal rounded-xl border border-white/[0.06] bg-white/[0.02] overflow-hidden transition-all duration-300">
-                  <button onClick={() => setOpenFaq(isOpen ? null : idx)} className="flex w-full items-center justify-between px-6 py-5 text-left text-sm font-medium text-white/70 hover:text-white transition-colors duration-200">
+                <div key={idx} className="scroll-reveal rounded-xl border border-white/[0.06] bg-white/[0.04] overflow-hidden transition-all duration-300">
+                  <button onClick={() => setOpenFaq(isOpen ? null : idx)} className="flex w-full items-center justify-between px-6 py-5 text-left text-base font-medium text-white/80 hover:text-white transition-colors duration-200">
                     <span>{faq.q}</span>
                     <span className={`shrink-0 ml-4 transition-transform duration-300 ${isOpen ? 'rotate-45' : ''}`}>
-                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" className="text-white/40">
+                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" className="text-white/60">
                         <line x1="8" y1="2" x2="8" y2="14" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
                         <line x1="2" y1="8" x2="14" y2="8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
                       </svg>
                     </span>
                   </button>
                   <div className={`overflow-hidden transition-all duration-300 ease-in-out ${isOpen ? 'max-h-80 opacity-100' : 'max-h-0 opacity-0'}`}>
-                    <div className="px-6 pb-5 text-sm leading-relaxed text-white/40 border-t border-white/[0.06] pt-4">{faq.a}</div>
+                    <div className="px-6 pb-5 text-base leading-relaxed text-white/70 border-t border-white/[0.06] pt-4">{faq.a}</div>
                   </div>
                 </div>
               );
             })}
           </div>
-          </div>
-        </div>
-      </section>
 
-      {/* ─── CTA ─── */}
-      <section className="border-b border-white/[0.06] bg-[#0a0a0a]">
-        <div className="mx-auto max-w-7xl px-6 py-20 text-center lg:py-32">
-          <div className="scroll-reveal">
-            <span className="font-mono text-xs tracking-[0.25em] text-white/30">05 // Կապ</span>
-            <h2 className="mt-4 text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl">Անվճար չափագրում տեղում</h2>
-            <p className="mx-auto mt-4 max-w-lg text-base leading-relaxed text-white/40">Մենք այցելում ենք ձեր օբյեկտ, կատարում ճշգրիտ չափագրում և տրամադրում անհատական գնային առաջարկ՝ առանց պարտավորության։</p>
-            <a href="#" className="magnetic-btn group mt-8 inline-flex items-center gap-2 rounded-full bg-white px-8 py-3.5 text-sm font-semibold text-[#0a0a0a] hover:bg-white/90 transition-all duration-300">
-              Լրացնել հայտ<span className="inline-block transition-transform duration-300 group-hover:translate-x-1">&rarr;</span>
-            </a>
-          </div>
-        </div>
-      </section>
-
-      {/* ─── FOOTER ─── */}
-      <footer className="bg-[#0a0a0a]">
-        <div className="mx-auto max-w-7xl px-6 py-14 lg:px-10 lg:py-20">
-          <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
-            <div className="sm:col-span-2 lg:col-span-1 scroll-reveal">
-              <a href="#" className="flex items-center gap-2 group">
-                <span className="text-lg font-bold tracking-tight text-white">DIGITAL</span>
-                <span className="text-lg font-light tracking-tight text-white/40 group-hover:text-white/60 transition-colors">DOOR</span>
+            <div className="mt-16 scroll-reveal text-center border-t border-white/[0.06] pt-12">
+              <span className="font-mono text-sm tracking-[0.25em] text-white/80">05 // Կապ</span>
+              <h2 className="mt-4 text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl text-white">Անվճար չափագրում տեղում</h2>
+              <p className="mx-auto mt-4 max-w-lg text-base leading-relaxed text-white/70">Մենք այցելում ենք ձեր օբյեկտ, կատարում ճշգրիտ չափագրում և տրամադրում անհատական գնային առաջարկ՝ առանց պարտավորության։</p>
+              <a href="#" className="magnetic-btn group mt-8 inline-flex items-center gap-2 rounded-full bg-white px-8 py-3.5 text-sm font-semibold text-[#0a0a0a] hover:bg-white/90 transition-all duration-300">
+                Լրացնել հայտ<span className="inline-block transition-transform duration-300 group-hover:translate-x-1">&rarr;</span>
               </a>
-              <p className="mt-4 text-sm leading-relaxed text-white/30 max-w-xs">«Smart» դարպասների տեղադրում և ավտոմատացում։ Alutech-ի պաշտոնական ներկայացուցիչը Հայաստանում 2015 թվականից։</p>
             </div>
-            <div className="scroll-reveal">
-              <h4 className="text-xs font-mono tracking-[0.2em] text-white/30 uppercase">Արագ հղումներ</h4>
-              <ul className="mt-4 space-y-3">
-                {['Գլխավոր', 'Կատալոգ', 'Ծառայություններ', 'ՀՏՀ', 'Կապ', 'Գաղտնիության քաղաքականություն'].map((link) => (
-                  <li key={link}><a href="#" className="text-sm text-white/40 hover:text-white transition-colors duration-300">{link}</a></li>
-                ))}
-              </ul>
-            </div>
-            <div className="scroll-reveal">
-              <h4 className="text-xs font-mono tracking-[0.2em] text-white/30 uppercase">Կապ</h4>
-              <ul className="mt-4 space-y-3 text-sm text-white/40">
-                <li><a href="tel:+37433505022" className="hover:text-white transition-colors duration-300">+374 33 50 50 22</a></li>
-                <li><a href="#" className="hover:text-white transition-colors duration-300">Լրացնել ձևաթուղթ</a></li>
-                <li>Երևան, Հայաստան</li>
-                <li>Երկ–Ուրբ 09:00 – 18:00</li>
-              </ul>
-            </div>
-          </div>
-          <div className="mt-12 border-t border-white/[0.06] pt-8 flex flex-wrap items-center justify-between gap-4">
-            <div className="flex flex-wrap gap-x-6 gap-y-2 text-xs font-mono tracking-wider text-white/30">
-              <a href="tel:+37433505022" className="hover:text-white transition-colors duration-300">+374 33 50 50 22</a>
-              {socialLinks.map((s) => (
-                <a key={s.name} href={s.url} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors duration-300">
-                  {s.name}
+
+            <div className="mt-12 grid gap-10 sm:grid-cols-2 lg:grid-cols-4 border-t border-white/[0.06] pt-12">
+              <div className="sm:col-span-2 lg:col-span-1 scroll-reveal">
+                <a href="#" className="flex items-center gap-2 group">
+                  <span className="text-xl font-bold tracking-tight text-white">DIGITAL</span>
+                  <span className="text-xl font-light tracking-tight text-white/60 group-hover:text-white/80 transition-colors">DOOR</span>
                 </a>
-              ))}
+                <p className="mt-4 text-sm leading-relaxed text-white/60 max-w-xs">«Smart» դարպասների տեղադրում և ավտոմատացում։ Alutech-ի պաշտոնական ներկայացուցիչը Հայաստանում 2015 թվականից։</p>
+              </div>
+              <div className="scroll-reveal">
+                <h4 className="text-sm font-mono tracking-[0.2em] text-white/80 uppercase">Արագ հղումներ</h4>
+                <ul className="mt-4 space-y-3">
+                  {[{name:'Գլխավոր', href:'#top'}, {name:'Կատալոգ', href:'#catalog'}, {name:'Ծառայություններ', href:'#services'}].map((link) => (
+                    <li key={link.name}><a href={link.href} className="text-base text-white/70 hover:text-white transition-colors duration-300">{link.name}</a></li>
+                  ))}
+                </ul>
+              </div>
+              <div className="scroll-reveal">
+                <h4 className="text-sm font-mono tracking-[0.2em] text-white/80 uppercase">Կապ</h4>
+                <ul className="mt-4 space-y-3 text-base text-white/70">
+                  <li><a href="tel:+37433505022" className="text-white/90 hover:text-white transition-colors duration-300 text-lg font-medium">+374 33 50 50 22</a></li>
+                  <li><a href="#" className="text-white/70 hover:text-white transition-colors duration-300">Լրացնել ձևաթուղթ</a></li>
+                  <li className="text-white/70">Երևան, Հայաստան</li>
+                  <li className="text-white/70">Երկ–Ուրբ 09:00 – 18:00</li>
+                </ul>
+              </div>
             </div>
-            <span className="text-xs font-mono tracking-wider text-white/20">&copy; {new Date().getFullYear()} Digital Door.</span>
+            <div className="mt-8 border-t border-white/[0.06] pt-6 flex flex-wrap items-center justify-between gap-4">
+              <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm font-mono tracking-wider text-white/50">
+                <a href="tel:+37433505022" className="text-white/80 hover:text-white transition-colors duration-300">+374 33 50 50 22</a>
+                {socialLinks.map((s) => (
+                  <a key={s.name} href={s.url} target="_blank" rel="noopener noreferrer" className="text-white/60 hover:text-white transition-colors duration-300">
+                    {s.name}
+                  </a>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
-      </footer>
+      </section>
     </div>
   );
 }
