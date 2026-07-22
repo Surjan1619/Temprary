@@ -2,12 +2,59 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" href="/icon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Digital Door — Smart Gates Installation & Automation</title>
+    <style>
+      #root-skeleton {
+        min-height: 100vh;
+        background: #0a0a0a;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: opacity 0.3s ease;
+      }
+      #root-skeleton.fade-out {
+        opacity: 0;
+      }
+      .sk-spinner {
+        width: 48px; height: 48px;
+        border-radius: 50%;
+        border: 2px solid rgba(255,255,255,0.1);
+        border-top-color: rgba(255,255,255,0.8);
+        animation: sk-spin 0.8s linear infinite;
+      }
+      @keyframes sk-spin {
+        to { transform: rotate(360deg); }
+      }
+      .sk-logo {
+        margin-top: 16px;
+        display: flex;
+        gap: 8px;
+        font-family: system-ui, -apple-system, sans-serif;
+      }
+      .sk-logo-bold {
+        font-size: 18px; font-weight: 700; letter-spacing: -0.02em;
+        color: rgba(255,255,255,0.5);
+      }
+      .sk-logo-light {
+        font-size: 18px; font-weight: 300; letter-spacing: -0.02em;
+        color: rgba(255,255,255,0.25);
+      }
+    </style>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <div id="root-skeleton">
+        <div class="flex flex-col items-center gap-4">
+          <div class="sk-spinner"></div>
+          <div class="sk-logo">
+            <span class="sk-logo-bold">DIGITAL</span>
+            <span class="sk-logo-light">DOOR</span>
+          </div>
+        </div>
+      </div>
+    </div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
