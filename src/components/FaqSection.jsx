@@ -50,40 +50,42 @@ export default function FaqSection({ faqRef }) {
             </a>
           </div>
 
-          <div className="mt-12 grid gap-10 sm:grid-cols-2 lg:grid-cols-4 border-t border-white/[0.06] pt-12">
-            <div className="sm:col-span-2 lg:col-span-1 scroll-reveal">
-              <a href="#" className="flex items-center gap-2 group">
-                <span className="text-xl font-bold tracking-tight text-white">{t('brandBold')}</span>
-                <span className="text-xl font-light tracking-tight text-white/60 group-hover:text-white/80 transition-colors">{t('brandLight')}</span>
-              </a>
-              <p className="mt-4 text-sm leading-relaxed text-white/60 max-w-xs">{t('hero_label')} {t('hero_desc')}</p>
+          <div className="mt-12 grid gap-10 sm:grid-cols-2 border-t border-white/[0.06] pt-12">
+            <div className="scroll-reveal flex flex-col justify-between gap-8">
+              <div>
+                <a href="#" className="flex items-center gap-2 group">
+                  <span className="text-xl font-bold tracking-tight text-white">{t('brandBold')}</span>
+                  <span className="text-xl font-light tracking-tight text-white/60 group-hover:text-white/80 transition-colors">{t('brandLight')}</span>
+                </a>
+                <p className="mt-4 text-sm leading-relaxed text-white/60 max-w-xs">{t('hero_label')} {t('hero_desc')}</p>
+              </div>
+              <div>
+                <h4 className="text-sm font-mono tracking-[0.2em] text-white/80 uppercase">{t('footer_quicklinks')}</h4>
+                <ul className="mt-4 space-y-3">
+                  {[{name: t('nav_home'), href:'#top'}, {name: t('nav_catalog'), href:'#catalog'}, {name: t('nav_services'), href:'#services'}].map((link) => (
+                    <li key={link.name}><a href={link.href} className="text-base text-white/70 hover:text-white transition-colors duration-300">{link.name}</a></li>
+                  ))}
+                </ul>
+              </div>
             </div>
-            <div className="scroll-reveal">
-              <h4 className="text-sm font-mono tracking-[0.2em] text-white/80 uppercase">{t('footer_quicklinks')}</h4>
-              <ul className="mt-4 space-y-3">
-                {[{name: t('nav_home'), href:'#top'}, {name: t('nav_catalog'), href:'#catalog'}, {name: t('nav_services'), href:'#services'}].map((link) => (
-                  <li key={link.name}><a href={link.href} className="text-base text-white/70 hover:text-white transition-colors duration-300">{link.name}</a></li>
-                ))}
-              </ul>
-            </div>
-            <div className="scroll-reveal">
-              <h4 className="text-sm font-mono tracking-[0.2em] text-white/80 uppercase">{t('footer_contact_title')}</h4>
-              <ul className="mt-4 space-y-3 text-base text-white/70">
+            <div className="scroll-reveal flex flex-col justify-between gap-8">
+              <ul className="space-y-3 text-base text-white/70">
                 <li><a href="tel:+37433505022" className="text-white/90 hover:text-white transition-colors duration-300 text-lg font-medium">+374 33 50 50 22</a></li>
+                <li><a href="mailto:digitaldooram@gmail.com" className="text-white/70 hover:text-white transition-colors duration-300">{t('footer_email')}</a></li>
+                <li className="flex flex-wrap gap-x-4 gap-y-1">
+                  {socialLinks.map((s) => (
+                    <a key={s.name} href={s.url} target="_blank" rel="noopener noreferrer" className="text-white/60 hover:text-white transition-colors duration-300">
+                      {s.name}
+                    </a>
+                  ))}
+                </li>
+              </ul>
+              <ul className="space-y-3 text-base text-white/70">
                 <li><a href="#" className="text-white/70 hover:text-white transition-colors duration-300">{t('cta_request')}</a></li>
+                <li className="pt-2 text-xs font-mono tracking-[0.2em] text-white/40 uppercase">{t('footer_address_label')}</li>
                 <li className="text-white/70">{t('footer_address')}</li>
                 <li className="text-white/70">{t('footer_hours')}</li>
               </ul>
-            </div>
-          </div>
-          <div className="mt-8 border-t border-white/[0.06] pt-6 flex flex-wrap items-center justify-between gap-4">
-            <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm font-mono tracking-wider text-white/50">
-              <a href="tel:+37433505022" className="text-white/80 hover:text-white transition-colors duration-300">+374 33 50 50 22</a>
-              {socialLinks.map((s) => (
-                <a key={s.name} href={s.url} target="_blank" rel="noopener noreferrer" className="text-white/60 hover:text-white transition-colors duration-300">
-                  {s.name}
-                </a>
-              ))}
             </div>
           </div>
         </div>

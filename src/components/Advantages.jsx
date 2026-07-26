@@ -14,8 +14,7 @@ export default function Advantages({ advantagesRef }) {
         </div>
         <div className="grid gap-10 md:grid-cols-2 md:gap-16">
           {items.map((adv) => (
-            <div key={adv.num} className="scroll-reveal border-t border-white/[0.08] pt-6">
-              <span className="font-mono text-xs tracking-[0.2em] text-white/20">{adv.num}</span>
+            <div key={adv.title} className="scroll-reveal border-t border-white/[0.08] pt-6">
               <h3 className="mt-3 text-2xl font-bold">{adv.title}</h3>
               <p className="mt-3 leading-relaxed text-white/40 max-w-md">{adv.desc}</p>
             </div>

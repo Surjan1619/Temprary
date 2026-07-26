@@ -2,55 +2,44 @@
   "brand": "DIGITAL DOOR",
   "brandBold": "DIGITAL",
   "brandLight": "DOOR",
-
   "nav_home": "Home",
   "nav_catalog": "Catalog",
   "nav_services": "Services",
   "nav_faq": "FAQ",
   "nav_contact": "Contact",
-
   "cta_request": "Submit request",
-
   "hero_label": "«Smart» gate installation & automation",
   "hero_title_1": "Smart Gate",
   "hero_title_2": "Installation & Automation",
   "hero_desc": "Digital Door supplies and installs premium automated gate systems for residential, commercial, and industrial facilities. Official Alutech representative in Armenia since 2015.",
   "hero_cta_catalog": "View catalog",
   "hero_cta_measure": "Free measurement",
-
-  "catalog_num": "01 // Product Range",
+  "catalog_num": "Product Range",
   "catalog_title": "Doors and Gates",
   "catalog_desc": "Explore our complete product range. Each system is available in multiple series, from entry-level to premium.",
-
   "product_learn": "Learn more",
-
   "imagebreak_label": "Since 2015",
   "imagebreak_quote": "High-quality products certified by leading accredited organizations in the CIS, Europe, and America.",
-
-  "services_num": "02 // Our Services",
+  "services_num": "Our Services",
   "services_title": "What We Offer",
   "services_desc": "Digital Door offers products for both residential and industrial use, with manufacturer's warranty.",
-
-  "advantages_num": "03 // Advantages",
+  "advantages_num": "Advantages",
   "advantages_title": "Why",
   "advantages_title_highlight": "Digital Door",
-
-  "faq_num": "04 // FAQ",
+  "faq_num": "FAQ",
   "faq_title": "Frequently Asked Questions",
   "faq_desc": "The most common questions from our customers.",
-
-  "contact_num": "05 // Contact",
+  "contact_num": "Contact",
   "contact_title": "Free On-Site Measurement",
   "contact_desc": "We visit your site, take precise measurements, and provide a personalized quote with no obligation.",
   "contact_cta": "Submit request",
-
   "footer_quicklinks": "Quick Links",
   "footer_contact_title": "Contact",
-  "footer_address": "Yerevan, Armenia",
+  "footer_address_label": "Address",
+  "footer_address": "Yerevan, Mazmanyan str., 1/1 Garage Mall",
   "footer_hours": "Mon–Fri 09:00 – 18:00",
-
+  "footer_email": "digitaldooram@gmail.com",
   "back_to_catalog": "Back to catalog",
-
   "product_series": "SERIES COMPARISON",
   "product_series_title": "Available Series",
   "product_specs": "TECHNICAL SPECIFICATIONS",
@@ -60,7 +49,6 @@
   "product_related": "OTHER PRODUCTS",
   "product_related_title": "Also See",
   "product_order_title": "Order",
-
   "services_items": {
     "sectional": "Sectional Doors",
     "roller": "Roller Shutters",
@@ -73,35 +61,32 @@
     "curtain": "Fire Protection Curtains",
     "sideDoor": "Side Entrance Doors"
   },
-
   "advantages_list": [
     {
-      "num": "01",
       "title": "Quality Control",
       "desc": "Every painted aluminum and steel strip surface undergoes rigorous testing for adhesion, corrosion, and UV resistance."
     },
     {
-      "num": "02",
       "title": "High-Tech Anodized Coating",
       "desc": "Anodized aluminum profiles provide superior protection against UV radiation, moisture, and mechanical wear, maintaining impeccable architectural appearance for decades."
     },
     {
-      "num": "03",
       "title": "International Certification",
       "desc": "ISO 9001:2015 and ISO 14001:2015 certified. All products are independently tested and accredited by TÜV International Certification."
     },
     {
-      "num": "04",
       "title": "Official Alutech Partner",
       "desc": "As an authorized Alutech representative, we supply genuine European-made gate systems with full manufacturer's warranty."
     }
   ],
-
   "certifications": [
-    "ISO 9001:2015", "ISO 14001:2015", "TÜV Certified",
-    "Alutech Official Partner", "CE Marked", "EAC Certified"
+    "ISO 9001:2015",
+    "ISO 14001:2015",
+    "TÜV Certified",
+    "Alutech Official Partner",
+    "CE Marked",
+    "EAC Certified"
   ],
-
   "faqs": [
     {
       "q": "What types of gates do you offer?",
@@ -124,7 +109,6 @@
       "a": "We provide a 2-year official warranty on all products. Alutech products are warranted by the manufacturer. Extended warranty service contracts are also available."
     }
   ],
-
   "product_name_sectional": "Sectional Doors",
   "product_sub_sectional": "Prestige · Trend",
   "product_name_side-door": "Side Doors",

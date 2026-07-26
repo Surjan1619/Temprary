@@ -20,14 +20,17 @@ function PageSkeleton() {
 
 function App() {
   const [currentView, setCurrentView] = useState({ page: 'home', productId: null });
+  const [scrollPos, setScrollPos] = useState(0);
   const products = useProducts();
 
   const handleProductClick = (productId) => {
+    setScrollPos(window.scrollY);
     setCurrentView({ page: 'product', productId });
   };
 
   const handleBackToCatalog = () => {
     setCurrentView({ page: 'home', productId: null });
+    requestAnimationFrame(() => window.scrollTo(0, scrollPos));
   };
 
   let page;

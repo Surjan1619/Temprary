@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import Footer from '../components/Footer.jsx';
 import RelatedProducts from '../components/RelatedProducts.jsx';
+import brandLogos from '../data/brandLogos.js';
 
 export default function ProductPage({ product, onBack, onProductClick, products }) {
   const { t } = useTranslation();
@@ -59,10 +60,7 @@ export default function ProductPage({ product, onBack, onProductClick, products 
         <div className="absolute inset-0 bg-black/50" />
         <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/80 to-black/60" />
         <div className="relative mx-auto max-w-7xl px-6 pb-10 lg:px-10 w-full">
-          <div className="flex items-center gap-3 text-xs font-mono tracking-[0.2em] text-white/30 uppercase">
-            <span className="w-8 h-[1px] bg-white/30" />
-            {product.number}
-          </div>
+
           <h1 className="mt-2 text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl max-w-3xl">
             {product.title}
           </h1>
@@ -89,7 +87,7 @@ export default function ProductPage({ product, onBack, onProductClick, products 
                 className="absolute inset-0 h-full w-full object-cover blur-3xl opacity-30 scale-110"
               />
               <div className="relative h-full w-full flex items-center justify-center px-4 lg:px-8">
-                <button onClick={() => setLightbox(src)} className="w-full h-full flex items-center justify-center">
+                <button onClick={() => setLightbox(src)} className="w-full h-full flex items-center justify-center relative">
                   <img
                     src={src}
                     alt={`${product.title} — ${i + 1}`}
@@ -129,12 +127,25 @@ export default function ProductPage({ product, onBack, onProductClick, products 
 
       <section className="border-b border-white/[0.06] bg-[#0a0a0a]">
         <div className="mx-auto max-w-4xl px-6 py-12 lg:px-10 lg:py-20">
-          <h2 className="text-3xl font-bold tracking-tight sm:text-4xl animate-fade-in-up" style={{ animationFillMode: 'both' }}>
-            {product.title}
-          </h2>
-          <p className="mt-1 text-xs font-mono tracking-wider text-white/30 uppercase animate-fade-in-up" style={{ animationDelay: '0.1s', animationFillMode: 'both' }}>
-            {product.subtitle}
-          </p>
+          <div className="flex items-start gap-6">
+            {product.brand && brandLogos[product.brand] && (
+              <div className="shrink-0 bg-black/40 backdrop-blur-sm rounded-lg px-3 py-2">
+                <img
+                  src={brandLogos[product.brand]}
+                  alt={product.brand}
+                  className="h-10 sm:h-12 w-auto"
+                />
+              </div>
+            )}
+            <div className="min-w-0">
+              <h2 className="text-3xl font-bold tracking-tight sm:text-4xl animate-fade-in-up" style={{ animationFillMode: 'both' }}>
+                {product.title}
+              </h2>
+              <p className="mt-1 text-xs font-mono tracking-wider text-white/30 uppercase animate-fade-in-up" style={{ animationDelay: '0.1s', animationFillMode: 'both' }}>
+                {product.subtitle}
+              </p>
+            </div>
+          </div>
           <div className="mt-8 text-base leading-relaxed text-white/50 sm:text-lg animate-fade-in-up" style={{ animationDelay: '0.15s', animationFillMode: 'both' }}>
             {product.deepDescription}
           </div>
@@ -231,7 +242,7 @@ export default function ProductPage({ product, onBack, onProductClick, products 
               href="#"
               className="magnetic-btn group mt-8 inline-flex items-center gap-2 rounded-full bg-white px-8 py-3.5 text-sm font-semibold text-[#0a0a0a] hover:bg-white/90 transition-all duration-300"
             >
-              Լրացնել հայտ
+              {t('cta_request')}
               <span className="inline-block transition-transform duration-300 group-hover:translate-x-1">&rarr;</span>
             </a>
           </div>

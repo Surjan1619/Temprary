@@ -1,8 +1,8 @@
 export const productsData = [
   {
     id: 'sectional',
-    number: '01',
     icon: 'sectional',
+    brand: 'alutech',
     title: 'Sectional Doors',
     subtitle: 'Prestige · Trend',
     img: '/images/section-door.avif',
@@ -66,8 +66,8 @@ export const productsData = [
   },
   {
     id: 'side-door',
-    number: '02',
     icon: 'sideDoor',
+    brand: 'alutech',
     title: 'Side Doors',
     subtitle: 'Alutech · Side Door',
     img: '/images/side-door.avif',
@@ -120,8 +120,8 @@ export const productsData = [
   },
   {
     id: 'roller',
-    number: '03',
     icon: 'roller',
+    brand: 'alutech',
     title: 'Roller Doors',
     subtitle: 'Prestige · Trend',
     img: '/images/rolling-door.webp',
@@ -179,8 +179,8 @@ export const productsData = [
   },
   {
     id: 'sliding',
-    number: '04',
     icon: 'sliding',
+    brand: 'alutech',
     title: 'Automatic Sliding Gates',
     subtitle: 'Cantilever · Trackless',
     img: '/images/industial-door.avif',
@@ -238,8 +238,8 @@ export const productsData = [
   },
   {
     id: 'high-speed',
-    number: '05',
     icon: 'highSpeed',
+    brand: 'alutech',
     title: 'High-Speed Doors',
     subtitle: 'TurboFlex · TurboRoll',
     img: '/images/High-speed-gates.webp',
@@ -297,8 +297,8 @@ export const productsData = [
   },
   {
     id: 'fire-rated',
-    number: '06',
     icon: 'fire',
+    brand: 'mba',
     title: 'Fire-Rated Sectional Doors',
     subtitle: 'ProFire · EI60',
     img: '/images/fire-rated-sectional-doors.webp',
@@ -351,8 +351,8 @@ export const productsData = [
   },
   {
     id: 'panoramic',
-    number: '07',
     icon: 'panoramic',
+    brand: 'alutech',
     title: 'Panoramic Doors',
     subtitle: 'Alutech · Full-View',
     img: '/images/panorama-gate.jpg',
@@ -403,8 +403,8 @@ export const productsData = [
   },
   {
     id: 'curtain',
-    number: '08',
     icon: 'curtain',
+    brand: 'mba',
     title: 'Fire Protection Curtains',
     subtitle: 'EI 60 · EI 180 · E60',
     img: '/images/pre-fire-curtain.avif',

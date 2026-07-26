@@ -1,22 +1,29 @@
 import { useTranslation } from 'react-i18next';
 import { iconMap } from '../data/icons.jsx';
+import brandLogos from '../data/brandLogos.js';
 
 export default function ProductCard({ product, onProductClick }) {
   const { t } = useTranslation();
   const Icon = iconMap[product.icon];
   return (
     <article key={product.id} onClick={() => onProductClick(product.id)} className="card-hover group relative overflow-hidden rounded-2xl border border-white/[0.06] bg-white/[0.03] backdrop-blur-sm cursor-pointer">
-      <div className="aspect-[16/10] overflow-hidden">
+      <div className="relative aspect-[16/10] overflow-hidden">
         <img src={product.img} alt={product.title} className="img-zoom h-full w-full object-cover" loading="lazy" />
         <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/40 to-transparent" />
       </div>
-      <div className="absolute top-5 left-5 flex items-center gap-2 font-mono text-xs tracking-[0.15em] text-white/30">
-        <span className="text-white/50">{product.number}</span>
-        <span className="w-6 h-[1px] bg-white/20" />
-      </div>
+
       <div className="relative p-6 sm:p-8">
         <div className="flex items-start gap-4">
           <div className="mt-0.5 text-white/60 shrink-0"><Icon /></div>
+          {product.brand && brandLogos[product.brand] && (
+            <div className="shrink-0 bg-black/40 backdrop-blur-sm rounded-lg px-2.5 py-1.5">
+              <img
+                src={brandLogos[product.brand]}
+                alt={product.brand}
+                className="h-7 w-auto"
+              />
+            </div>
+          )}
           <div className="min-w-0">
             <h3 className="text-xl font-bold leading-snug sm:text-2xl">{product.title}</h3>
             <p className="mt-1 text-xs font-mono tracking-wider text-white/30 uppercase">{product.subtitle}</p>
