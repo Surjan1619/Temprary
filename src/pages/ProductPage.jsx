@@ -127,7 +127,7 @@ export default function ProductPage({ product, onBack, onProductClick, products 
 
       <section className="border-b border-white/[0.06] bg-[#0a0a0a]">
         <div className="mx-auto max-w-4xl px-6 py-12 lg:px-10 lg:py-20">
-          <div className="flex items-start gap-6">
+          <div className="flex flex-wrap items-center gap-4">
             {product.brand && brandLogos[product.brand] && (
               <div className="shrink-0 bg-black/40 backdrop-blur-sm rounded-lg px-3 py-2">
                 <img
@@ -137,14 +137,21 @@ export default function ProductPage({ product, onBack, onProductClick, products 
                 />
               </div>
             )}
-            <div className="min-w-0">
-              <h2 className="text-3xl font-bold tracking-tight sm:text-4xl animate-fade-in-up" style={{ animationFillMode: 'both' }}>
-                {product.title}
-              </h2>
-              <p className="mt-1 text-xs font-mono tracking-wider text-white/30 uppercase animate-fade-in-up" style={{ animationDelay: '0.1s', animationFillMode: 'both' }}>
-                {product.subtitle}
-              </p>
+            <div className="shrink-0 bg-black/40 backdrop-blur-sm rounded-lg px-3 py-2">
+              <img
+                src="/images/1.png"
+                alt="Digital Door"
+                className="h-14 sm:h-16 w-auto"
+              />
             </div>
+          </div>
+          <div className="mt-8 min-w-0">
+            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl animate-fade-in-up" style={{ animationFillMode: 'both' }}>
+              {product.title}
+            </h2>
+            <p className="mt-1 text-xs font-mono tracking-wider text-white/30 uppercase animate-fade-in-up" style={{ animationDelay: '0.1s', animationFillMode: 'both' }}>
+              {product.subtitle}
+            </p>
           </div>
           <div className="mt-8 text-base leading-relaxed text-white/50 sm:text-lg animate-fade-in-up" style={{ animationDelay: '0.15s', animationFillMode: 'both' }}>
             {product.deepDescription}

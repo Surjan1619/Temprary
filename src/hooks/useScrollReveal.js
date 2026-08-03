@@ -1,7 +1,9 @@
 import { useEffect, useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 
 export function useScrollReveal() {
   const ref = useRef(null);
+  const { i18n } = useTranslation();
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
@@ -19,6 +21,6 @@ export function useScrollReveal() {
     const targets = el.querySelectorAll('.scroll-reveal');
     targets.forEach((t) => observer.observe(t));
     return () => observer.disconnect();
-  }, []);
+  }, [i18n.language]);
   return ref;
 }

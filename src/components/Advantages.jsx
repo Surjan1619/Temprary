@@ -13,8 +13,8 @@ export default function Advantages({ advantagesRef }) {
           <h2 className="mt-4 text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl">{t('advantages_title')} <span className="text-white/30">{t('advantages_title_highlight')}</span></h2>
         </div>
         <div className="grid gap-10 md:grid-cols-2 md:gap-16">
-          {items.map((adv) => (
-            <div key={adv.title} className="scroll-reveal border-t border-white/[0.08] pt-6">
+          {items.map((adv, idx) => (
+            <div key={idx} className="scroll-reveal border-t border-white/[0.08] pt-6">
               <h3 className="mt-3 text-2xl font-bold">{adv.title}</h3>
               <p className="mt-3 leading-relaxed text-white/40 max-w-md">{adv.desc}</p>
             </div>
