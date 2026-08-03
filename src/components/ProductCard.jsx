@@ -14,7 +14,6 @@ export default function ProductCard({ product, onProductClick }) {
 
       <div className="relative p-6 sm:p-8">
         <div className="flex items-start gap-4">
-          <div className="mt-0.5 text-white/60 shrink-0"><Icon /></div>
           {product.brand && brandLogos[product.brand] && (
             <div className="shrink-0 bg-black/40 backdrop-blur-sm rounded-lg px-2.5 py-1.5">
               <img
@@ -24,6 +23,7 @@ export default function ProductCard({ product, onProductClick }) {
               />
             </div>
           )}
+          <div className="mt-0.5 text-white/60 shrink-0"><Icon /></div>
           <div className="min-w-0">
             <h3 className="text-xl font-bold leading-snug sm:text-2xl">{product.title}</h3>
             <p className="mt-1 text-xs font-mono tracking-wider text-white/30 uppercase">{product.subtitle}</p>
