@@ -1,4 +1,5 @@
 import { useTranslation } from 'react-i18next';
+import { requestLinkProps } from '../data/siteData.js';
 
 export default function Hero() {
   const { t } = useTranslation();
@@ -26,7 +27,7 @@ export default function Hero() {
             <a href="#catalog" className="magnetic-btn group inline-flex items-center gap-2 rounded-full bg-white px-8 py-3.5 text-sm font-semibold text-[#0a0a0a] hover:bg-white/90 transition-all duration-300">
               {t('hero_cta_catalog')}<span className="inline-block transition-transform duration-300 group-hover:translate-x-1">&rarr;</span>
             </a>
-            <a href="#" className="magnetic-btn group inline-flex items-center gap-2 rounded-full border border-white/20 px-8 py-3.5 text-sm font-semibold text-white hover:border-white/50 transition-all duration-300">
+            <a {...requestLinkProps(t('request_message_measure'))} className="magnetic-btn group inline-flex items-center gap-2 rounded-full border border-white/20 px-8 py-3.5 text-sm font-semibold text-white hover:border-white/50 transition-all duration-300">
               {t('hero_cta_measure')}<span className="inline-block text-white/40 text-lg leading-none transition-transform duration-300 group-hover:translate-x-1">&rarr;</span>
             </a>
           </div>

@@ -124,5 +124,11 @@
   "product_name_panoramic": "Панорамные ворота",
   "product_sub_panoramic": "Alutech · Full-View",
   "product_name_curtain": "Противопожарные шторы",
-  "product_sub_curtain": "EI 60 · EI 180 · E60"
+  "product_sub_curtain": "EI 60 · EI 180 · E60",
+  "products_error": "Не удалось загрузить товары.",
+  "products_empty": "Товаров пока нет.",
+  "retry": "Повторить",
+  "request_message": "Здравствуйте! Хочу оставить заявку.",
+  "request_message_product": "Здравствуйте! Хочу заказать: {{product}}.",
+  "request_message_measure": "Здравствуйте! Хочу записаться на бесплатный замер."
 }

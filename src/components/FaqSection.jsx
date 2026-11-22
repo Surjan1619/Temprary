@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { socialLinks } from '../data/siteData.js';
+import { contacts, emailHref, phoneHref, requestLinkProps, socialLinks } from '../data/siteData.js';
 
 export default function FaqSection({ faqRef }) {
   const { t } = useTranslation();
@@ -45,7 +45,7 @@ export default function FaqSection({ faqRef }) {
             <span className="font-mono text-sm tracking-[0.25em] text-white/80">{t('contact_num')}</span>
             <h2 className="mt-4 text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl text-white">{t('contact_title')}</h2>
             <p className="mx-auto mt-4 max-w-lg text-base leading-relaxed text-white/70">{t('contact_desc')}</p>
-            <a href="#" className="magnetic-btn group mt-8 inline-flex items-center gap-2 rounded-full bg-white px-8 py-3.5 text-sm font-semibold text-[#0a0a0a] hover:bg-white/90 transition-all duration-300">
+            <a {...requestLinkProps(t('request_message'))} className="magnetic-btn group mt-8 inline-flex items-center gap-2 rounded-full bg-white px-8 py-3.5 text-sm font-semibold text-[#0a0a0a] hover:bg-white/90 transition-all duration-300">
               {t('contact_cta')}<span className="inline-block transition-transform duration-300 group-hover:translate-x-1">&rarr;</span>
             </a>
           </div>
@@ -70,8 +70,8 @@ export default function FaqSection({ faqRef }) {
             </div>
             <div className="scroll-reveal flex flex-col justify-between gap-8">
               <ul className="space-y-3 text-base text-white/70">
-                <li><a href="tel:+37433505022" className="text-white/90 hover:text-white transition-colors duration-300 text-lg font-medium">+374 33 50 50 22</a></li>
-                <li><a href="mailto:digitaldooram@gmail.com" className="text-white/70 hover:text-white transition-colors duration-300">{t('footer_email')}</a></li>
+                <li><a href={phoneHref} className="text-white/90 hover:text-white transition-colors duration-300 text-lg font-medium">{contacts.phoneDisplay}</a></li>
+                <li><a href={emailHref} className="text-white/70 hover:text-white transition-colors duration-300">{t('footer_email')}</a></li>
                 <li className="flex flex-wrap gap-x-4 gap-y-1">
                   {socialLinks.map((s) => (
                     <a key={s.name} href={s.url} target="_blank" rel="noopener noreferrer" className="text-white/60 hover:text-white transition-colors duration-300">
@@ -81,7 +81,7 @@ export default function FaqSection({ faqRef }) {
                 </li>
               </ul>
               <ul className="space-y-3 text-base text-white/70">
-                <li><a href="#" className="text-white/70 hover:text-white transition-colors duration-300">{t('cta_request')}</a></li>
+                <li><a {...requestLinkProps(t('request_message'))} className="text-white/70 hover:text-white transition-colors duration-300">{t('cta_request')}</a></li>
                 <li className="pt-2 text-xs font-mono tracking-[0.2em] text-white/40 uppercase">{t('footer_address_label')}</li>
                 <li className="text-white/70">{t('footer_address')}</li>
                 <li className="text-white/70">{t('footer_hours')}</li>

@@ -124,5 +124,11 @@
   "product_name_panoramic": "Պանորամային դարպասներ",
   "product_sub_panoramic": "Alutech · Full-View",
   "product_name_curtain": "Հրդեհապաշտպան վարագույրներ",
-  "product_sub_curtain": "EI 60 · EI 180 · E60"
+  "product_sub_curtain": "EI 60 · EI 180 · E60",
+  "products_error": "Չհաջողվեց բեռնել ապրանքները։",
+  "products_empty": "Ապրանքներ դեռ չկան։",
+  "retry": "Կրկին փորձել",
+  "request_message": "Բարև ձեզ։ Ցանկանում եմ հայտ թողնել։",
+  "request_message_product": "Բարև ձեզ։ Ցանկանում եմ պատվիրել՝ {{product}}։",
+  "request_message_measure": "Բարև ձեզ։ Ցանկանում եմ գրանցվել անվճար չափագրման։"
 }

@@ -124,5 +124,11 @@
   "product_name_panoramic": "Panoramic Doors",
   "product_sub_panoramic": "Alutech · Full-View",
   "product_name_curtain": "Fire Protection Curtains",
-  "product_sub_curtain": "EI 60 · EI 180 · E60"
+  "product_sub_curtain": "EI 60 · EI 180 · E60",
+  "products_error": "Could not load products.",
+  "products_empty": "No products yet.",
+  "retry": "Try again",
+  "request_message": "Hello! I'd like to submit a request.",
+  "request_message_product": "Hello! I'd like to order: {{product}}.",
+  "request_message_measure": "Hello! I'd like to book a free measurement."
 }

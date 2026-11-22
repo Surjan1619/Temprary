@@ -1,16 +1,305 @@
-# React + Vite
+# Digital Door — сайт-каталог ворот и автоматики
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Сайт компании Digital Door (Армения): каталог секционных, рулонных, откатных, скоростных, противопожарных и панорамных ворот брендов **Alutech** и **MBA**. Три языка: армянский (по умолчанию), русский, английский. Товары хранятся в PostgreSQL и редактируются через админку `/admin`.
 
-Currently, two official plugins are available:
+📋 **План работ и статус задач — в [TASKS.md](TASKS.md).**
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Стек
 
-## React Compiler
+- **Фронтенд:** React 19, Vite 8, Tailwind CSS 4, i18next
+- **Сервер:** Node.js 22, Express 5, `pg`, `multer`
+- **База данных:** PostgreSQL 17
+- **Запуск:** Docker + docker compose
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Быстрый старт в Docker
 
-## Expanding the ESLint configuration
+```bash
+cp .env.example .env
+```
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+В `.env` замените все значения `change-me-…`. Для `SESSION_SECRET` подойдёт вывод команды:
+
+```bash
+openssl rand -hex 32
+```
+
+Затем:
+
+```bash
+docker compose up -d --build
+```
+
+- Сайт: http://localhost:8080 (порт меняется через `WEB_PORT`)
+- Админка: http://localhost:8080/admin (пароль — `ADMIN_PASSWORD` из `.env`)
+
+При первом запуске сервер сам создаёт таблицы и загружает 8 исходных товаров. Повторно товары не загружаются, поэтому удалённое в админке не вернётся после перезапуска.
+
+Данные хранятся в двух томах docker: `pgdata` (база) и `uploads` (загруженные фото). Команда `docker compose down` их сохраняет, а `docker compose down -v` **удаляет навсегда**.
+
+Полезные команды:
+
+```bash
+docker compose logs -f web
+```
+
+```bash
+docker compose exec db pg_dump -U digitaldoor digitaldoor > backup.sql
+```
+
+```bash
+docker compose up -d --build web
+```
+
+(последняя — пересобрать и перезапустить сайт после изменений в коде)
+
+## Разработка без Docker
+
+Нужны Node.js 22+ и запущенный PostgreSQL. Базу проще поднять из того же compose: раскомментируйте `ports` у сервиса `db` и выполните `docker compose up -d db`.
+
+```bash
+npm ci
+```
+
+В `.env` раскомментируйте `DATABASE_URL`, затем в одном терминале:
+
+```bash
+npm run dev:server
+```
+
+и во втором:
+
+```bash
+npm run dev
+```
+
+Vite (http://localhost:5173) проксирует `/api` и `/uploads` на сервер (http://localhost:3000).
+
+| Команда | Что делает |
+|---|---|
+| `npm run dev` | фронтенд с горячей перезагрузкой |
+| `npm run dev:server` | API-сервер с перезапуском при изменениях |
+| `npm run build` | сборка фронтенда в `dist/` |
+| `npm start` | production-сервер: API + `dist/` |
+| `npm run lint` | ESLint |
+
+## Админка
+
+Адрес `/admin`. В ней можно:
+- **добавить товар:** ID (латиница, станет частью адреса), иконка, бренд, порядок сортировки, основное фото и галерея, тексты на трёх языках;
+- **изменить товар:** все поля, кроме ID;
+- **удалить товар:** после подтверждения; загруженные для него фото удаляются, если больше нигде не используются.
+
+Обязателен только армянский текст. Если у русского или английского нет названия, на сайте для этого языка показывается армянская версия.
+
+Описание товара пишется в HTML: блоки `<div><h3>Заголовок</h3><p>Текст</p></div>`, разрешены `strong`, `em`, `ul/ol/li`, `a`, `br`. Скрипты, стили и атрибуты вырезаются (DOMPurify). Рядом с полем есть предпросмотр.
+
+Списки заполняются по строке на пункт. Для серий, характеристик и преимуществ формат строки `Название | Описание`.
+
+**Безопасность:** вход по паролю из `ADMIN_PASSWORD`, сессия — подписанная httpOnly-cookie на 12 часов (`SameSite=Strict`). Не больше 10 неудачных попыток входа за 15 минут с одного IP. Загружаются только настоящие изображения (JPEG/PNG/WebP/AVIF/GIF, до 10 МБ): тип проверяется по содержимому файла. На сайте в интернете нужен HTTPS и `COOKIE_SECURE=true`.
+
+## API
+
+| Метод | Путь | Доступ | Описание |
+|---|---|---|---|
+| GET | `/api/health` | все | проверка сервера и БД |
+| GET | `/api/products?lang=am\|ru\|en` | все | товары на нужном языке |
+| GET | `/api/admin/me` | все | вошёл ли пользователь |
+| POST | `/api/admin/login` / `logout` | все | вход / выход |
+| GET | `/api/admin/products` | админ | все товары со всеми переводами |
+| POST | `/api/admin/products` | админ | создать товар |
+| PUT | `/api/admin/products/:id` | админ | изменить товар |
+| DELETE | `/api/admin/products/:id` | админ | удалить товар |
+| POST | `/api/admin/upload` | админ | загрузить фото (`multipart`, поле `file`) |
+
+## Структура
+
+```
+server/
+  index.js                 — Express: API, раздача dist/ и uploads/, заголовки безопасности
+  config.js                — настройки из переменных окружения
+  db.js                    — пул PostgreSQL, создание схемы, первичная загрузка товаров
+  db/schema.sql            — таблицы products, product_translations, app_meta
+  db/seed-products.json    — исходные 8 товаров (бывшие src/data/products_*.jsx)
+  products.js              — проверка данных и запросы к БД
+  auth.js, uploads.js      — вход в админку, загрузка фото
+  routes/public.js, admin.js
+src/
+  main.jsx, Root.jsx       — точка входа; /admin → админка, иначе сайт
+  App.jsx                  — сайт: переключение главная / товар
+  admin/                   — админка (вход, список, форма товара)
+  data/useProducts.js      — загрузка товаров из API с кэшем по языкам
+  pages/, components/      — страницы и секции сайта
+  locales/{am,en,ru}/      — переводы интерфейса
+public/images/             — статичные изображения
+Dockerfile, docker-compose.yml, .env.example
+```
+
+---
+
+# Отчёт о проверке
+
+Дата проверки: 22.11.2026, коммит `b318c69`.
+
+> **Обновление.** После проверки товары перенесены в PostgreSQL и добавлена админка. Уже исправлены: ошибки линтера, `npm audit`, `tailwindcss` в devDependencies, загрузка всех языков в главный бандл (4) и падение при неизвестной иконке (1.11). Проверка в браузере нашла ещё две проблемы: картинка первого экрана с Unsplash удалена (404), а на странице товара есть горизонтальная прокрутка. Статус всех пунктов и порядок работ — в [TASKS.md](TASKS.md).
+
+## Что проверялось и с каким результатом
+
+| Проверка | Результат |
+|---|---|
+| `npm ci` | ✅ установка проходит |
+| `npm run build` | ✅ сборка проходит без ошибок и предупреждений |
+| `npm run lint` | ❌ **2 ошибки** (подробности ниже) |
+| `npm audit` | ⚠️ уязвимости в зависимостях сборки (high), исправляются через `npm audit fix` |
+| Совпадение ключей переводов am/en/ru | ✅ во всех трёх по 79 ключей, ничего не пропущено |
+| Данные товаров (id, иконки, бренды, пути к картинкам) | ✅ все 11 локальных картинок существуют, id одинаковые во всех языках |
+| Автотесты | ❌ их нет |
+
+Уровни: 🔴 ошибка (что-то работает неправильно), 🟠 недочёт (заметен пользователю или мешает работе), 🟡 мелочь или вопрос чистоты кода.
+
+---
+
+## 1. Функциональные ошибки
+
+### ✅ 1.1. Кнопки «Заказать / Оставить заявку / Связаться» никуда не вели — исправлено (звонок или WhatsApp, `src/data/siteData.js`)
+У всех главных CTA-кнопок стоит `href="#"`, и при клике страница просто прокручивается наверх. Для сайта, задача которого — получать заявки, это главная проблема.
+- [Header.jsx:26](src/components/Header.jsx#L26) — кнопка в шапке
+- [Header.jsx:47](src/components/Header.jsx#L47) — кнопка в мобильном меню
+- [Hero.jsx:29](src/components/Hero.jsx#L29) — «Вызвать замерщика»
+- [FaqSection.jsx:48](src/components/FaqSection.jsx#L48), [FaqSection.jsx:84](src/components/FaqSection.jsx#L84)
+- [ProductPage.jsx:249](src/pages/ProductPage.jsx#L249) — «Заказать …» на странице товара
+
+**Как исправить:** вести на `tel:+37433505022`, WhatsApp/Telegram, `mailto:` или на форму заявки.
+
+### 🔴 1.2. Приложение падает (белый экран), если `localStorage` недоступен
+[i18n.js:7](src/i18n.js#L7) вызывает `localStorage.getItem` на верхнем уровне модуля без `try/catch`. Если хранилище заблокировано (строгие настройки приватности, некоторые встроенные браузеры, iframe с запретом cookies), браузер бросает `SecurityError`, и React вообще не запускается. То же самое при записи в [LanguageSwitcher.jsx:15](src/components/LanguageSwitcher.jsx#L15).
+
+**Как исправить:** обернуть чтение и запись в `try/catch`, при ошибке использовать язык `am`.
+
+### 🔴 1.3. Неправильная прокрутка при возврате в каталог после перехода на «похожий товар»
+[App.jsx:26-34](src/App.jsx#L26): `handleProductClick` сохраняет `window.scrollY` при **каждом** переходе, в том числе со страницы товара на соседний товар (блок RelatedProducts). Поэтому после цепочки «каталог → товар A → товар B → назад» запоминается позиция внизу страницы товара A, а не в каталоге, и пользователь оказывается не там, где был.
+
+**Как исправить:** сохранять позицию только когда `currentView.page === 'home'` (и лучше в `useRef`, а не в state).
+
+### 🔴 1.4. Нет URL для страниц: кнопка «Назад» браузера уводит с сайта
+Страницы переключаются через `useState` ([App.jsx:22](src/App.jsx#L22)), адрес в браузере не меняется. Из этого следует:
+- системная кнопка/жест «Назад» на телефоне закрывает сайт, а не возвращает в каталог;
+- ссылкой на конкретный товар нельзя поделиться;
+- после перезагрузки на странице товара открывается главная;
+- поисковики не видят страницы товаров (SEO).
+
+**Как исправить:** подключить `react-router` или хотя бы хеш-маршруты (`#/product/sectional`) с обработкой `popstate`/`hashchange`.
+
+### 🟠 1.5. На странице товара нельзя сменить язык
+У [ProductPage.jsx:39-52](src/pages/ProductPage.jsx#L39) своя шапка, и `LanguageSwitcher` в ней нет. Чтобы сменить язык, приходится сначала вернуться на главную.
+
+### 🟠 1.6. «Контакты» в меню ведут в раздел FAQ
+В [Header.jsx:21-22](src/components/Header.jsx#L21) и [Header.jsx:45-46](src/components/Header.jsx#L45) у пунктов FAQ и «Контакты» одинаковая ссылка `#faq`. Отдельного якоря `#contact` нет, хотя блок контактов есть внутри [FaqSection.jsx:44](src/components/FaqSection.jsx#L44).
+
+### 🟠 1.7. Якорные ссылки уходят под фиксированную шапку
+Шапка `fixed` ([Header.jsx:11](src/components/Header.jsx#L11)), а у секций нет `scroll-margin-top`. При переходе по `#catalog`, `#services`, `#faq` верх заголовка оказывается под шапкой.
+
+**Как исправить:** добавить, например, `section[id] { scroll-margin-top: 80px; }` в `index.css`.
+
+### 🟠 1.8. Затемняющий градиент в «Похожих товарах» перекрывает всю карточку
+В [RelatedProducts.jsx:24-26](src/components/RelatedProducts.jsx#L24) у градиента стоит `absolute inset-0`, но у его родителя (`aspect-[16/10]`) нет `relative`. Поэтому градиент позиционируется относительно кнопки-карточки (у неё `backdrop-blur`) и затемняет текстовую часть. В [ProductCard.jsx:10](src/components/ProductCard.jsx#L10) это сделано правильно: там `relative` есть.
+
+### 🟠 1.9. Длинные ответы в FAQ могут обрезаться
+Раскрытый ответ ограничен `max-h-80` (320px) в [FaqSection.jsx:36](src/components/FaqSection.jsx#L36). Длинный текст на узком экране или на армянском (там строки длиннее) обрежется без прокрутки.
+
+### 🟡 1.10. Иконка `fire_sectional` отсутствует
+В [Services.jsx:6](src/components/Services.jsx#L6) есть ключ `fire_sectional`, но в `iconMap` ([iconMap.js](src/data/iconMap.js)) такой иконки нет, и молча подставляется иконка секционных ворот. Ошибки нет, но пункт выглядит неправильно.
+
+### ✅ 1.11. Возможный краш при опечатке в данных — исправлено (`ProductIcon` с иконкой по умолчанию)
+[ProductCard.jsx:7](src/components/ProductCard.jsx#L7) и [RelatedProducts.jsx:17](src/components/RelatedProducts.jsx#L17) берут `iconMap[product.icon]` без запасного варианта. Сейчас все иконки на месте, но одна опечатка в `icon:` в данных уронит весь каталог (`<undefined />`). В `Services.jsx` такая защита есть, здесь её нет.
+
+---
+
+## 2. Доступность (a11y)
+
+- 🟠 **Карточка товара не работает с клавиатуры.** [ProductCard.jsx:9](src/components/ProductCard.jsx#L9): `<article onClick>` без `role="button"`, `tabIndex` и обработки Enter/Space. На товар нельзя перейти через Tab, и скринридер не понимает, что это ссылка.
+- 🟠 **Лайтбокс не закрывается по Escape** и не блокирует прокрутку фона ([ProductPage.jsx:261](src/pages/ProductPage.jsx#L261)). Фокус в него не переводится.
+- 🟠 **Мобильное меню** тоже не закрывается по Escape и не блокирует прокрутку `body` ([Header.jsx:40](src/components/Header.jsx#L40)).
+- 🟡 Кнопки без подписи: стрелки галереи «〈 〉», точки-индикаторы, крестик лайтбокса ([ProductPage.jsx:106-122](src/pages/ProductPage.jsx#L106), [ProductPage.jsx:266](src/pages/ProductPage.jsx#L266)). Нужны `aria-label`.
+- 🟡 Кнопки FAQ без `aria-expanded` / `aria-controls` ([FaqSection.jsx:27](src/components/FaqSection.jsx#L27)).
+- 🟡 Подпись `aria-label` в мобильном меню («Open menu») не переводится.
+- 🟡 Нет поддержки `prefers-reduced-motion`: бесконечная анимация ken-burns и появление блоков работают у всех, включая тех, кто отключил анимации в системе ([index.css](src/index.css)).
+- 🟡 Низкий контраст: много текста `text-white/20`–`text-white/35` на `#0a0a0a`, это ниже требования WCAG AA (4.5:1).
+
+---
+
+## 3. SEO и `index.html`
+
+- 🟠 `<html lang="en">` ([index.html:2](index.html#L2)), хотя язык по умолчанию армянский. JS исправляет это, но поисковики и скринридеры видят первоначальное значение.
+- 🟠 `<title>` только на английском и не меняется при смене языка или товара.
+- 🟠 Нет `<meta name="description">`, Open Graph и Twitter-тегов: превью ссылки в соцсетях и мессенджерах будет пустым.
+- 🟡 Нет `robots.txt`, `sitemap.xml` и структурированных данных (`Organization`, `Product`).
+- 🟡 `public/favicon.svg` лежит, но не подключён (используется `icon.png`).
+
+---
+
+## 4. Производительность
+
+- ✅ *Исправлено: товары грузятся из API только на текущем языке, главный чанк теперь ~70 kB.* ~~🟠 **Все три языка товаров попадают в главный бандл.** `useProducts` ([useProducts.js:2-4](src/data/useProducts.js#L2)) статически импортирует `products_am/en/ru.jsx`, а `App.jsx` его использует. Главный чанк весит ~179 kB (46 kB gzip), и большую часть занимает текст, который пользователь не читает. Разделение `HomePage`/`ProductPage` через `lazy` из-за этого почти ничего не даёт.~~
+- 🟠 **Внешние картинки Unsplash.** Hero, шапка страницы товара и фон FAQ берутся с `images.unsplash.com` ([Hero.jsx:9](src/components/Hero.jsx#L9), [ProductPage.jsx:56](src/pages/ProductPage.jsx#L56), [FaqSection.jsx:13](src/components/FaqSection.jsx#L13)). Это зависимость от чужого сервера: картинка в 1920px грузится на телефон, LCP хуже. К тому же у **всех** товаров одна и та же фотография в шапке, и она не связана с товаром.
+- 🟡 Тяжёлые картинки: `roller_2.jpg` — 684 kB, `roller_1.jpg` — 176 kB, `side-door.avif` — 172 kB. Нет `srcset`/`sizes`, `width`/`height` (из-за этого скачет вёрстка, CLS).
+- 🟡 Галерея товара рендерит **все** изображения сразу, и каждое дважды (размытый фон + основное): для рулонных ворот это 8 полноразмерных картинок.
+- 🟡 `transition: all` в `.card-hover` и `.magnetic-btn` ([index.css:137-165](src/index.css#L137)) анимирует лишние свойства.
+
+---
+
+## 5. Качество кода
+
+### ✅ Ошибки линтера (`npm run lint`) — исправлено, lint проходит
+```
+src/data/icons.jsx:114  react-refresh/only-export-components
+  — файл экспортирует и компоненты, и объект iconMap
+src/main.jsx:7          react-refresh/only-export-components
+  — компонент RootSkeleton объявлен в файле без экспортов
+```
+Работе сайта это не мешает, но ломает Fast Refresh в dev-режиме и не даёт lint пройти в CI. Исправление: вынести `iconMap` в отдельный `.js`, а `RootSkeleton` — в отдельный компонент.
+
+### Дублирование
+- Скелетон загрузки «DIGITAL DOOR» написан **три раза**: [index.html:47](index.html#L47), [main.jsx:7](src/main.jsx#L7), [App.jsx:7](src/App.jsx#L7). Два вложенных `Suspense` с одинаковым fallback не нужны.
+- Блок контактов (телефон, соцсети) повторяется в [FaqSection.jsx](src/components/FaqSection.jsx) и [Footer.jsx](src/components/Footer.jsx). Телефон `+374 33 50 50 22` и email записаны прямо в разметке, а не в `siteData.js`.
+- Три файла товаров по 459 строк с одинаковой структурой. Числовые характеристики (размеры, U-value и т.п.) продублированы в каждом языке, и при правке легко изменить их в одном файле и забыть в других.
+- Длинные строки Tailwind-классов в меню шапки скопированы 5 раз ([Header.jsx:18-22](src/components/Header.jsx#L18)).
+
+### ✅ Данные смешаны с разметкой — исправлено: товары в БД, описание — HTML, редактируется в админке
+`deepDescription` в `products_*.jsx` — это JSX с Tailwind-классами. Тексты не сможет править человек без знания React, их нельзя отдать в CMS или в i18n. Рядом лежит `upgraded_products_arm.md` (48 kB), видимо, исходник армянских текстов, и синхронизировать его приходится вручную.
+
+### Неиспользуемое и лишнее
+- Неиспользуемые ключи переводов (во всех трёх языках): `footer_contact_title`, `product_name_*`, `product_sub_*` (16 ключей).
+- `getBrandLogo()` в [brandLogos.js:6](src/data/brandLogos.js#L6) нигде не вызывается.
+- `key={product.id}` внутри `ProductCard` ([ProductCard.jsx:9](src/components/ProductCard.jsx#L9)) ни на что не влияет: ключ ставится в родителе.
+- Классы `.scroll-reveal-left` / `.scroll-reveal-right` в CSS не используются.
+- Неиспользуемые файлы: `public/images/alutech.png`, `public/favicon.svg`, `public/icons.svg`.
+- `product_docs/` — три PDF общим весом **~24 MB** в git. В коде они не используются, а историю репозитория раздувают навсегда.
+- Опечатка в имени файла: `industial-door.avif` (должно быть `industrial`).
+
+### Мелочи
+- Двойной `scrollTo` при переходе на похожий товар: в [RelatedProducts.jsx:21](src/components/RelatedProducts.jsx#L21) и в эффекте [ProductPage.jsx:32-34](src/pages/ProductPage.jsx#L32). Проверка `if (pageRef.current)` в эффекте ничего не делает.
+- В карточке товара после двух преимуществ всегда стоит «…» ([ProductCard.jsx:32](src/components/ProductCard.jsx#L32)), даже если других преимуществ нет. Сразу под этим тот же список выведен полностью, то есть информация повторяется.
+- `key={src}` в галерее и `key={f}` / `key={b.title}` сломаются, если значения повторятся. `key={idx}` в списках из переводов допустим, но хрупок.
+- `product.title.toLowerCase()` в заголовке «Заказать …» ([ProductPage.jsx:243](src/pages/ProductPage.jsx#L243)) портит названия брендов и аббревиатуры (`MBA` → `mba`).
+- Нет Error Boundary: если ленивый чанк не загрузится (плохая сеть, новый деплой), будет белый экран без сообщения.
+
+---
+
+## 6. Зависимости и проект
+
+- ✅ *Исправлено (`npm audit fix`, 0 уязвимостей).* ⚠️ `npm audit`: high-уязвимости в `vite` (8.0.0–8.1.5), `postcss`, `nanoid`, `source-map-js`, `brace-expansion`, `browserslist`, `zod`. Почти все касаются dev-сервера и сборки, а не готового сайта. Исправляется командой `npm audit fix` (обновит vite до ≥ 8.1.6).
+- ✅ *Исправлено.* 🟡 `tailwindcss` и `@tailwindcss/vite` лежали в `dependencies`, хотя нужны только при сборке. Их место в `devDependencies`.
+- ✅ *Исправлено.* 🟡 В `package.json` осталось шаблонное `"name": "my-react-app"` и версия `0.0.0`.
+- 🟡 Нет тестов, CI и `.nvmrc` / `engines` (не указана версия Node).
+- 🟡 Папка называется `Temprary` (опечатка: `Temporary`).
+
+---
+
+## Рекомендуемый порядок исправлений
+
+1. Подключить CTA-кнопки к реальным контактам или форме (1.1). Это главный бизнес-эффект.
+2. Добавить `try/catch` вокруг `localStorage` (1.2), исправить сохранение прокрутки (1.3) и выполнить `npm audit fix`. Всё это делается за пару минут.
+3. Сделать маршрутизацию с URL для товаров (1.4), а заодно добавить переключатель языка на страницу товара (1.5) и SEO-теги (раздел 3).
+4. Исправить якоря и шапку (1.6, 1.7), градиент (1.8) и доступность карточек и лайтбокса (раздел 2).
+5. Убрать ошибки линтера, дубли и неиспользуемые файлы, а PDF вынести из репозитория.
+6. Перенести картинки Unsplash к себе, оптимизировать изображения, загружать данные товаров по языку.

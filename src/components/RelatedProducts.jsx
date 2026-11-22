@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import { iconMap } from '../data/icons.jsx';
+import ProductIcon from './ProductIcon.jsx';
 
 export default function RelatedProducts({ products, currentId, onProductClick }) {
   const { t } = useTranslation();
@@ -14,7 +14,6 @@ export default function RelatedProducts({ products, currentId, onProductClick })
         </div>
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {related.map((p) => {
-            const Icon = iconMap[p.icon];
             return (
               <button
                 key={p.id}
@@ -27,7 +26,7 @@ export default function RelatedProducts({ products, currentId, onProductClick })
                 </div>
                 <div className="p-5">
                   <div className="flex items-center gap-3">
-                    <span className="text-white/40 shrink-0"><Icon /></span>
+                    <span className="text-white/40 shrink-0"><ProductIcon name={p.icon} /></span>
                     <h3 className="text-base font-bold">{p.title}</h3>
                   </div>
                   <p className="mt-2 text-xs text-white/40">{p.features.slice(0, 2).join(' · ')}</p>

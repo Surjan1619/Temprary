@@ -1,10 +1,12 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import LanguageSwitcher from './LanguageSwitcher.jsx';
+import { requestLinkProps } from '../data/siteData.js';
 
 export default function Header() {
   const { t } = useTranslation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const requestLink = requestLinkProps(t('request_message'));
 
   return (
     <>
@@ -23,7 +25,7 @@ export default function Header() {
           </nav>
           <div className="flex items-center gap-4">
             <LanguageSwitcher />
-            <a href="#" className="magnetic-btn hidden sm:inline-flex items-center rounded-full border border-white/20 px-6 py-2 text-sm font-semibold text-white hover:border-white/60 transition-all duration-300">{t('cta_request')}</a>
+            <a {...requestLink} className="magnetic-btn hidden sm:inline-flex items-center rounded-full border border-white/20 px-6 py-2 text-sm font-semibold text-white hover:border-white/60 transition-all duration-300">{t('cta_request')}</a>
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className="md:hidden relative z-50 flex flex-col gap-1.5 p-1"
@@ -44,7 +46,7 @@ export default function Header() {
           <a href="#services" onClick={() => setMobileMenuOpen(false)} className="text-2xl font-medium text-white/70 hover:text-white transition-colors">{t('nav_services')}</a>
           <a href="#faq" onClick={() => setMobileMenuOpen(false)} className="text-2xl font-medium text-white/70 hover:text-white transition-colors">{t('nav_faq')}</a>
           <a href="#faq" onClick={() => setMobileMenuOpen(false)} className="text-2xl font-medium text-white/70 hover:text-white transition-colors">{t('nav_contact')}</a>
-          <a href="#" onClick={() => setMobileMenuOpen(false)} className="mt-4 magnetic-btn inline-flex items-center rounded-full border border-white/20 px-8 py-3.5 text-base font-semibold text-white hover:border-white/60 transition-all duration-300">{t('cta_request')}</a>
+          <a {...requestLink} onClick={() => setMobileMenuOpen(false)} className="mt-4 magnetic-btn inline-flex items-center rounded-full border border-white/20 px-8 py-3.5 text-base font-semibold text-white hover:border-white/60 transition-all duration-300">{t('cta_request')}</a>
         </div>
       )}
     </>

@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import { socialLinks } from '../data/siteData.js';
+import { contacts, phoneHref, socialLinks } from '../data/siteData.js';
 
 export default function Footer({ onBack }) {
   const { t } = useTranslation();
@@ -14,7 +14,7 @@ export default function Footer({ onBack }) {
           </button>
         </div>
         <div className="mt-6 flex flex-wrap gap-x-6 gap-y-2 text-xs font-mono tracking-wider text-white/30">
-          <a href="tel:+37433505022" className="hover:text-white transition-colors duration-300">+374 33 50 50 22</a>
+          <a href={phoneHref} className="hover:text-white transition-colors duration-300">{contacts.phoneDisplay}</a>
           {socialLinks.map((s) => (
             <a key={s.name} href={s.url} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors duration-300">
               {s.name}

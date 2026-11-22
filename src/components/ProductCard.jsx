@@ -1,10 +1,9 @@
 import { useTranslation } from 'react-i18next';
-import { iconMap } from '../data/icons.jsx';
+import ProductIcon from './ProductIcon.jsx';
 import brandLogos from '../data/brandLogos.js';
 
 export default function ProductCard({ product, onProductClick }) {
   const { t } = useTranslation();
-  const Icon = iconMap[product.icon];
   return (
     <article key={product.id} onClick={() => onProductClick(product.id)} className="card-hover group relative overflow-hidden rounded-2xl border border-white/[0.06] bg-white/[0.03] backdrop-blur-sm cursor-pointer">
       <div className="relative aspect-[16/10] overflow-hidden">
@@ -23,7 +22,7 @@ export default function ProductCard({ product, onProductClick }) {
               />
             </div>
           )}
-          <div className="mt-0.5 text-white/60 shrink-0"><Icon /></div>
+          <div className="mt-0.5 text-white/60 shrink-0"><ProductIcon name={product.icon} /></div>
           <div className="min-w-0">
             <h3 className="text-xl font-bold leading-snug sm:text-2xl">{product.title}</h3>
             <p className="mt-1 text-xs font-mono tracking-wider text-white/30 uppercase">{product.subtitle}</p>

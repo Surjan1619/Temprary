@@ -110,16 +110,3 @@ export const IconCurtain = () => (
     <path d="M30 4 Q26 14 30 24 Q26 34 30 44" stroke="currentColor" strokeWidth="0.8" fill="none" opacity="0.3" />
   </svg>
 );
-
-export const iconMap = {
-  sectional: IconSectional,
-  sideDoor: IconSideDoor,
-  sliding: IconSlidingGate,
-  highSpeed: IconHighSpeed,
-  roller: IconRollerShutter,
-  fire: IconFireRated,
-  panoramic: IconPanoramic,
-  control: IconControl,
-  ventilation: IconVentilation,
-  curtain: IconCurtain,
-};

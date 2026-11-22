@@ -3,6 +3,8 @@ import { useTranslation } from 'react-i18next';
 import Footer from '../components/Footer.jsx';
 import RelatedProducts from '../components/RelatedProducts.jsx';
 import brandLogos from '../data/brandLogos.js';
+import { sanitizeHtml } from '../utils/sanitizeHtml.js';
+import { requestLinkProps } from '../data/siteData.js';
 
 export default function ProductPage({ product, onBack, onProductClick, products }) {
   const { t } = useTranslation();
@@ -153,9 +155,11 @@ export default function ProductPage({ product, onBack, onProductClick, products 
               {product.subtitle}
             </p>
           </div>
-          <div className="mt-8 text-base leading-relaxed text-white/50 sm:text-lg animate-fade-in-up" style={{ animationDelay: '0.15s', animationFillMode: 'both' }}>
-            {product.deepDescription}
-          </div>
+          <div
+            className="product-desc mt-8 text-base leading-relaxed text-white/50 sm:text-lg animate-fade-in-up"
+            style={{ animationDelay: '0.15s', animationFillMode: 'both' }}
+            dangerouslySetInnerHTML={{ __html: sanitizeHtml(product.descriptionHtml) }}
+          />
           <div className="mt-8 flex flex-wrap gap-2 animate-fade-in-up" style={{ animationDelay: '0.25s', animationFillMode: 'both' }}>
             {product.features.map((f) => (
               <span key={f} className="flex items-center gap-1.5 rounded-full border border-white/[0.08] bg-white/[0.03] px-4 py-2 text-xs text-white/40">
@@ -246,7 +250,7 @@ export default function ProductPage({ product, onBack, onProductClick, products 
               {t('contact_desc')}
             </p>
             <a
-              href="#"
+              {...requestLinkProps(t('request_message_product', { product: product.title }))}
               className="magnetic-btn group mt-8 inline-flex items-center gap-2 rounded-full bg-white px-8 py-3.5 text-sm font-semibold text-[#0a0a0a] hover:bg-white/90 transition-all duration-300"
             >
               {t('cta_request')}

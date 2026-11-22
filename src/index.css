@@ -180,3 +180,38 @@
 html {
   scroll-behavior: smooth;
 }
+
+/* Описание товара (HTML из админки) */
+.product-desc > * + * {
+  margin-top: 2.5rem;
+}
+.product-desc h3,
+.product-desc h4 {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: rgb(255 255 255 / 0.8);
+}
+.product-desc p {
+  margin-top: 0.5rem;
+  line-height: 1.625;
+  color: rgb(255 255 255 / 0.5);
+}
+.product-desc strong,
+.product-desc b {
+  color: rgb(255 255 255 / 0.8);
+}
+.product-desc ul,
+.product-desc ol {
+  margin-top: 0.5rem;
+  padding-left: 1.25rem;
+  color: rgb(255 255 255 / 0.5);
+}
+.product-desc ul { list-style: disc; }
+.product-desc ol { list-style: decimal; }
+.product-desc a {
+  color: rgb(255 255 255 / 0.8);
+  text-decoration: underline;
+}
