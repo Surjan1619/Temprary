@@ -17,7 +17,7 @@ export default function RelatedProducts({ products, currentId, onProductClick })
             return (
               <button
                 key={p.id}
-                onClick={() => { window.scrollTo({ top: 0, behavior: 'smooth' }); onProductClick(p.id); }}
+                onClick={() => onProductClick(p.id)}
                 className="card-hover group text-left overflow-hidden rounded-2xl border border-white/[0.06] bg-white/[0.03] backdrop-blur-sm"
               >
                 <div className="aspect-[16/10] overflow-hidden">

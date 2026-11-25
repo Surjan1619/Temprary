@@ -21,7 +21,7 @@ export default function Header() {
             <a href="#catalog" className="relative py-1 hover:text-white transition-colors duration-300 after:absolute after:bottom-0 after:left-0 after:h-[1px] after:w-0 after:bg-white after:transition-all after:duration-300 hover:after:w-full">{t('nav_catalog')}</a>
             <a href="#services" className="relative py-1 hover:text-white transition-colors duration-300 after:absolute after:bottom-0 after:left-0 after:h-[1px] after:w-0 after:bg-white after:transition-all after:duration-300 hover:after:w-full">{t('nav_services')}</a>
             <a href="#faq" className="relative py-1 hover:text-white transition-colors duration-300 after:absolute after:bottom-0 after:left-0 after:h-[1px] after:w-0 after:bg-white after:transition-all after:duration-300 hover:after:w-full">{t('nav_faq')}</a>
-            <a href="#faq" className="relative py-1 hover:text-white transition-colors duration-300 after:absolute after:bottom-0 after:left-0 after:h-[1px] after:w-0 after:bg-white after:transition-all after:duration-300 hover:after:w-full">{t('nav_contact')}</a>
+            <a href="#contact" className="relative py-1 hover:text-white transition-colors duration-300 after:absolute after:bottom-0 after:left-0 after:h-[1px] after:w-0 after:bg-white after:transition-all after:duration-300 hover:after:w-full">{t('nav_contact')}</a>
           </nav>
           <div className="flex items-center gap-4">
             <LanguageSwitcher />
@@ -45,7 +45,7 @@ export default function Header() {
           <a href="#catalog" onClick={() => setMobileMenuOpen(false)} className="text-2xl font-medium text-white/70 hover:text-white transition-colors">{t('nav_catalog')}</a>
           <a href="#services" onClick={() => setMobileMenuOpen(false)} className="text-2xl font-medium text-white/70 hover:text-white transition-colors">{t('nav_services')}</a>
           <a href="#faq" onClick={() => setMobileMenuOpen(false)} className="text-2xl font-medium text-white/70 hover:text-white transition-colors">{t('nav_faq')}</a>
-          <a href="#faq" onClick={() => setMobileMenuOpen(false)} className="text-2xl font-medium text-white/70 hover:text-white transition-colors">{t('nav_contact')}</a>
+          <a href="#contact" onClick={() => setMobileMenuOpen(false)} className="text-2xl font-medium text-white/70 hover:text-white transition-colors">{t('nav_contact')}</a>
           <a {...requestLink} onClick={() => setMobileMenuOpen(false)} className="mt-4 magnetic-btn inline-flex items-center rounded-full border border-white/20 px-8 py-3.5 text-base font-semibold text-white hover:border-white/60 transition-all duration-300">{t('cta_request')}</a>
         </div>
       )}

@@ -7,7 +7,7 @@ export default function Hero() {
   return (
     <section id="top" className="relative min-h-screen flex items-center overflow-hidden border-b border-white/[0.06]">
       <div className="absolute inset-0">
-        <img src="https://images.unsplash.com/photo-1600607688968-a2ad6e6791ca?w=1920&q=85" alt="" className="h-full w-full object-cover animate-ken-burns" />
+        <img src="/images/High-speed-gates.webp" alt="" className="h-full w-full object-cover animate-ken-burns" />
         <div className="absolute inset-0 bg-black/40" />
         <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/60 to-black/80" />
         <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-transparent" />

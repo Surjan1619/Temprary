@@ -8,6 +8,7 @@ import {
 import {
   getProduct, insertProduct, listProducts, referencedImages, updateProduct, validateProduct,
 } from '../products.js';
+import { getStats, STATS_PERIODS } from '../stats.js';
 import { removeOrphanUploads, saveImage, upload } from '../uploads.js';
 
 export const adminRouter = Router();
@@ -38,6 +39,11 @@ adminRouter.post('/logout', (req, res) => {
 });
 
 adminRouter.use(requireAdmin);
+
+adminRouter.get('/stats', async (req, res) => {
+  const days = Number(req.query.days);
+  res.json(await getStats(STATS_PERIODS.includes(days) ? days : 30));
+});
 
 adminRouter.get('/products', async (req, res) => {
   res.json(await listProducts());

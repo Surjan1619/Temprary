@@ -28,6 +28,7 @@ export const api = {
   me: () => request('/api/admin/me'),
   login: (password) => request('/api/admin/login', { method: 'POST', body: { password } }),
   logout: () => request('/api/admin/logout', { method: 'POST' }),
+  stats: (days) => request(`/api/admin/stats?days=${days}`),
   list: () => request('/api/admin/products'),
   create: (product) => request('/api/admin/products', { method: 'POST', body: product }),
   update: (id, product) => request(`/api/admin/products/${encodeURIComponent(id)}`, { method: 'PUT', body: product }),

@@ -7,6 +7,7 @@ import { initDb, pool } from './db.js';
 import { ValidationError } from './products.js';
 import { adminRouter } from './routes/admin.js';
 import { publicRouter } from './routes/public.js';
+import { startStatsCleanup } from './stats.js';
 
 const app = express();
 app.disable('x-powered-by');
@@ -68,6 +69,7 @@ app.use((err, req, res, next) => {
 });
 
 await initDb();
+startStatsCleanup();
 const server = app.listen(config.port, () => console.log(`[server] http://localhost:${config.port}`));
 
 function shutdown(signal) {

@@ -3,13 +3,14 @@ import { api } from './api.js';
 import LoginForm from './LoginForm.jsx';
 import ProductForm from './ProductForm.jsx';
 import ProductList from './ProductList.jsx';
+import StatsPage from './StatsPage.jsx';
 import { Button, ErrorBox } from './ui.jsx';
 import PageSkeleton from '../components/PageSkeleton.jsx';
 
 export default function AdminApp() {
   const [auth, setAuth] = useState({ status: 'checking', enabled: true });
   const [products, setProducts] = useState(null);
-  const [view, setView] = useState({ mode: 'list' }); // list | create | edit
+  const [view, setView] = useState({ mode: 'list' }); // list | create | edit | stats
   const [error, setError] = useState(null);
   const [notice, setNotice] = useState('');
   const [deletingId, setDeletingId] = useState(null);
@@ -93,14 +94,19 @@ export default function AdminApp() {
   return (
     <div className="min-h-screen bg-[#0a0a0a] text-white font-sans antialiased">
       <header className="sticky top-0 z-40 border-b border-white/[0.06] bg-black/70 backdrop-blur-xl">
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
+        <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-y-3 px-6 py-4">
           <div className="flex items-center gap-2">
             <span className="font-bold tracking-tight">DIGITAL</span>
             <span className="font-light tracking-tight text-white/40">DOOR</span>
             <span className="ml-2 rounded-full border border-white/15 px-2 py-0.5 text-xs font-mono text-white/50">admin</span>
           </div>
           <div className="flex items-center gap-2">
-            <a href="/" target="_blank" rel="noreferrer" className="px-3 text-sm text-white/50 hover:text-white">Открыть сайт ↗</a>
+            {(view.mode === 'list' || view.mode === 'stats') && (
+              <Button onClick={() => { setError(null); setView({ mode: view.mode === 'stats' ? 'list' : 'stats' }); }}>
+                {view.mode === 'stats' ? 'Товары' : 'Посещения'}
+              </Button>
+            )}
+            <a href="/" target="_blank" rel="noreferrer" className="hidden px-3 text-sm text-white/50 hover:text-white sm:block">Открыть сайт ↗</a>
             <Button onClick={logout}>Выйти</Button>
           </div>
         </div>
@@ -114,6 +120,8 @@ export default function AdminApp() {
 
         {!products ? (
           <PageSkeleton />
+        ) : view.mode === 'stats' ? (
+          <StatsPage products={products} onAuthLost={handleError} />
         ) : view.mode === 'list' ? (
           <ProductList
             products={products}

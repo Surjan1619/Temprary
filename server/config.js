@@ -13,6 +13,7 @@ export const config = {
   uploadDir: path.resolve(env.UPLOAD_DIR || 'uploads'),
   staticDir: path.resolve(env.STATIC_DIR || 'dist'),
   maxUploadMb: Number(env.MAX_UPLOAD_MB) || 10,
+  statsTimeZone: env.STATS_TIMEZONE || 'Asia/Yerevan',
 };
 
 if (!config.adminPassword) {

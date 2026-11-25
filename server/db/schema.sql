@@ -31,3 +31,17 @@ CREATE TABLE IF NOT EXISTS app_meta (
   key   TEXT PRIMARY KEY,
   value TEXT NOT NULL
 );
+
+-- Посещения сайта (server/stats.js). IP не хранится: visitor — хеш, который меняется каждый день.
+CREATE TABLE IF NOT EXISTS page_views (
+  id          BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+  created_at  TIMESTAMPTZ NOT NULL DEFAULT now(),
+  day         DATE NOT NULL,
+  visitor     TEXT NOT NULL,
+  path        TEXT NOT NULL,
+  referrer    TEXT NOT NULL DEFAULT '',
+  lang        TEXT NOT NULL DEFAULT '',
+  device      TEXT NOT NULL DEFAULT ''
+);
+
+CREATE INDEX IF NOT EXISTS page_views_day_idx ON page_views (day, visitor);

@@ -23,8 +23,18 @@ dist-ssr
 *.sln
 *.sw?
 
-# Server
-uploads
+# Секреты
 .env
 .env.*
 !.env.example
+
+# Данные сервера: фото из админки и резервные копии базы
+/uploads/
+/backups/
+*.dump
+/backup*.sql
+
+# Локальные настройки Claude
+.claude/
+
+# Картинки сайта (public/images) НЕ игнорируются: без них сайт не работает

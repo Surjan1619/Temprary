@@ -10,7 +10,7 @@ export default function FaqSection({ faqRef }) {
   return (
     <section id="faq" ref={faqRef} className="relative overflow-hidden border-b border-white/[0.06] bg-[#0a0a0a]">
       <div className="absolute inset-0">
-        <img src="https://images.unsplash.com/photo-1600573472591-ee6b68d14c68?w=1920&q=85" alt="" loading="lazy" className="h-full w-full object-cover opacity-30" />
+        <img src="/images/panorama-gate.jpg" alt="" loading="lazy" className="h-full w-full object-cover opacity-30" />
       </div>
       <div className="relative mx-auto max-w-6xl px-6 py-20 lg:px-10 lg:py-24">
         <div className="bg-[#0a0a0a]/60 backdrop-blur-sm rounded-2xl border border-white/[0.06] p-8 lg:p-12">
@@ -41,7 +41,7 @@ export default function FaqSection({ faqRef }) {
           })}
         </div>
 
-          <div className="mt-16 scroll-reveal text-center border-t border-white/[0.06] pt-12">
+          <div id="contact" className="mt-16 scroll-reveal text-center border-t border-white/[0.06] pt-12">
             <span className="font-mono text-sm tracking-[0.25em] text-white/80">{t('contact_num')}</span>
             <h2 className="mt-4 text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl text-white">{t('contact_title')}</h2>
             <p className="mx-auto mt-4 max-w-lg text-base leading-relaxed text-white/70">{t('contact_desc')}</p>

@@ -181,6 +181,12 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Якоря меню (#catalog, #faq, #contact…): не прятать начало раздела под фиксированную шапку (~70px). */
+section[id],
+#contact {
+  scroll-margin-top: 4.5rem;
+}
+
 /* Описание товара (HTML из админки) */
 .product-desc > * + * {
   margin-top: 2.5rem;

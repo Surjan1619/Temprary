@@ -1,14 +1,14 @@
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import Footer from '../components/Footer.jsx';
 import RelatedProducts from '../components/RelatedProducts.jsx';
+import LanguageSwitcher from '../components/LanguageSwitcher.jsx';
 import brandLogos from '../data/brandLogos.js';
 import { sanitizeHtml } from '../utils/sanitizeHtml.js';
 import { requestLinkProps } from '../data/siteData.js';
 
 export default function ProductPage({ product, onBack, onProductClick, products }) {
   const { t } = useTranslation();
-  const pageRef = useRef(null);
   const [imgIdx, setImgIdx] = useState(0);
   const [lightbox, setLightbox] = useState(null);
   const allImages = [product.img, ...(product.gallery || [])];
@@ -31,12 +31,8 @@ export default function ProductPage({ product, onBack, onProductClick, products 
     }
   };
 
-  useEffect(() => {
-    if (pageRef.current) window.scrollTo({ top: 0, behavior: 'smooth' });
-  }, [product.id]);
-
   return (
-    <div ref={pageRef} className="min-h-screen bg-[#0a0a0a] text-white font-sans antialiased selection:bg-white/20 selection:text-white">
+    <div className="min-h-screen bg-[#0a0a0a] text-white font-sans antialiased selection:bg-white/20 selection:text-white">
 
       <header className="fixed top-0 inset-x-0 z-50 bg-black/60 backdrop-blur-xl border-b border-white/[0.06]">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-10">
@@ -49,13 +45,16 @@ export default function ProductPage({ product, onBack, onProductClick, products 
             </svg>
             {t('back_to_catalog')}
           </button>
-          <span className="hidden sm:block text-xs font-mono tracking-[0.2em] text-white/30">{t('brand')}</span>
+          <div className="flex items-center gap-6">
+            <span className="hidden sm:block text-xs font-mono tracking-[0.2em] text-white/30">{t('brand')}</span>
+            <LanguageSwitcher />
+          </div>
         </div>
       </header>
 
       <section className="relative h-[45vh] sm:h-[55vh] flex items-end overflow-hidden">
         <img
-          src="https://images.unsplash.com/photo-1600607688968-a2ad6e6791ca?w=1920&q=85"
+          src="/images/High-speed-gates.webp"
           alt=""
           className="absolute inset-0 h-full w-full object-cover animate-ken-burns"
         />
@@ -72,7 +71,7 @@ export default function ProductPage({ product, onBack, onProductClick, products 
 
       <section className="bg-[#0a0a0a] border-b border-white/[0.06]">
         <div
-          className="relative flex items-center justify-center"
+          className="relative overflow-hidden flex items-center justify-center"
           style={{ minHeight: '70vh', touchAction: 'pan-y' }}
           onTouchStart={handleTouchStart}
           onTouchEnd={handleTouchEnd}

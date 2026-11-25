@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
+import { writeStorage } from '../utils/storage.js';
 
 const languages = [
   { code: 'am', label: 'AM' },
@@ -12,7 +13,7 @@ export default function LanguageSwitcher() {
 
   useEffect(() => {
     document.documentElement.lang = i18n.language;
-    localStorage.setItem('app-lang', i18n.language);
+    writeStorage('app-lang', i18n.language);
   }, [i18n.language]);
 
   const switchLang = (code) => {

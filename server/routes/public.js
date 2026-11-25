@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import { pool } from '../db.js';
 import { DEFAULT_LANG, LANGS, listProducts, localize } from '../products.js';
+import { recordVisit, visitRateLimit } from '../stats.js';
 
 export const publicRouter = Router();
 
@@ -18,4 +19,9 @@ publicRouter.get('/products', async (req, res) => {
   const products = (await listProducts()).map((p) => localize(p, lang)).filter(Boolean);
   res.setHeader('Cache-Control', 'public, max-age=30');
   res.json(products);
+});
+
+publicRouter.post('/visit', visitRateLimit, async (req, res) => {
+  await recordVisit(req);
+  res.status(204).end();
 });
